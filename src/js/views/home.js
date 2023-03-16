@@ -16,9 +16,13 @@ export const Home = () =>{
 
 	const [planets,setPlanets]=useState([]);
 	useEffect(()=>{
-		fetch("https://www.swapi.tech/api/planets/")
+		fetch("https://www.swapi.tech/api/planets")
 			.then(res => res.json())
-			.then(data => setPlanets(data.results))
+			.then(data => {
+				console.log(data.results)
+				setPlanets(data.results)
+				})
+				
 			.catch(err => console.error(err))
 	})
 
@@ -37,7 +41,7 @@ export const Home = () =>{
 			<h1>people</h1>
 				<div className="card-group people">
 					{people.map((character,i)=>{
-					return <Card title={character.name} />
+					return <Card key={i} title={character.name} />
 					})}
 				</div>
 
@@ -45,7 +49,7 @@ export const Home = () =>{
 				<div className="card-group planets">
 				
 					{planets.map((planet,i)=>{
-					return <Card title={planet.name} />
+					return <Card key={i} title={planet.name} />
 					})}
 				</div>
 
@@ -53,7 +57,7 @@ export const Home = () =>{
 				<div className="card-group vehicles">
 				
 					{vehicles.map((vehicle,i)=>{
-					return <Card title={vehicle.name} />
+					return <Card key={i} title={vehicle.name} />
 					})}
 				</div>
 			</div>
